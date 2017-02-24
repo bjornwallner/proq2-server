@@ -22,7 +22,12 @@
 
 #set installation directory of SSpro to your unzipped sspro4 directory 
 #$install_dir = "/scratch/sspro4-bjornw/";
-$install_dir="/local/www/services/ProQ2/apps/sspro4/";
+use File::Basename;
+use Cwd 'abs_path';
+my $install_dir = dirname(abs_path($0));
+#print $install_dir."\n";
+#exit;
+#$install_dir="/local/www/services/ProQ2/apps/sspro4/";
 ##########End of Customizaton################################################
 
 
@@ -66,7 +71,7 @@ if ( substr($big_db_dir, length($big_db_dir) - 1, 1) ne "/" )
 }
 
 #check if the database are there. 
-$nr_db_f = $nr_db_dir . $nr_db; 
+#$nr_db_f = $nr_db_dir . $nr_db; 
 $big_db_f = $big_db_dir . $big_db; 
 
 if (! -f "${big_db_f}.pal") {
@@ -76,13 +81,13 @@ if (! -f "${big_db_f}.phr" || ! -f "${big_db_f}.pin" || ! -f "${big_db_f}.psq")
 } 
 }
 
-if (! -f "${nr_db_f}.pal") {
-if (! -f "${nr_db_f}.phr" || ! -f "${nr_db_f}.pin" || ! -f "${nr_db_f}.psq" || ! -f "${nr_db_f}.pnd"
-    || ! -f "${nr_db_f}.pni" || ! -f "${nr_db_f}.psd" || ! -f "${nr_db_f}.psi" )
-{
-	die "can't find the non-redundant database.\n"; 	
-} 
-}
+#if (! -f "${nr_db_f}.pal") {
+#if (! -f "${nr_db_f}.phr" || ! -f "${nr_db_f}.pin" || ! -f "${nr_db_f}.psq" || ! -f "${nr_db_f}.pnd"
+#    || ! -f "${nr_db_f}.pni" || ! -f "${nr_db_f}.psd" || ! -f "${nr_db_f}.psi" )
+#{
+#	die "can't find the non-redundant database.\n"; 	
+#} 
+#}
 
 #check if the installation directory is right
 #the configuration file must run in the installation directory
