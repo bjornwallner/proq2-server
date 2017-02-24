@@ -1,0 +1,25 @@
+/AlignFactory.pm/1.7/Fri Feb 23 15:19:39 2001//
+/AnalysisResult.pm/1.7/Mon Feb 26 11:19:44 2001//
+/BPbl2seq.pm/1.13/Mon Jun 18 12:43:22 2001//
+/BPlite.pm/1.22/Thu May 31 14:35:46 2001//
+/BPpsilite.pm/1.16/Thu May 31 14:35:46 2001//
+/Blast.pm/1.19/Wed May 16 14:57:44 2001//
+/CodonTable.pm/1.13/Wed May 16 14:57:44 2001//
+/ESTScan.pm/1.6/Mon Feb 26 11:28:47 2001//
+/Fasta.pm/1.8/Mon Jun 18 12:43:22 2001//
+/GFF.pm/1.12/Wed May 16 14:57:44 2001//
+/Genemark.pm/1.7/Mon Jun 18 21:13:00 2001//
+/Genscan.pm/1.17/Thu May 24 20:33:28 2001//
+/Grail.pm/1.2/Mon Jun 18 12:43:22 2001//
+/IUPAC.pm/1.11/Wed May 16 14:57:44 2001//
+/MZEF.pm/1.7/Wed May 16 14:57:44 2001//
+/OddCodes.pm/1.7/Mon Jun 18 12:43:22 2001//
+/RestrictionEnzyme.pm/1.11/Mon Jun 18 12:43:22 2001//
+/SeqAnal.pm/1.6/Wed May 16 14:57:45 2001//
+/SeqPattern.pm/1.6/Mon Jun 18 12:43:22 2001//
+/SeqStats.pm/1.13/Sat Jun  9 23:01:30 2001//
+/SeqWords.pm/1.3/Wed May 16 14:57:45 2001//
+/Sigcleave.pm/1.12/Fri Dec 29 07:43:27 2000//
+/WWW.pm/1.6/Wed May 16 14:57:45 2001//
+/pSW.pm/1.12/Sat Jun  2 21:17:18 2001//
+D

@@ -1,0 +1,102 @@
+BLASTP 2.2.18 [Mar-02-2008]
+
+
+Reference: Altschul, Stephen F., Thomas L. Madden, Alejandro A. Schaffer, 
+Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), 
+"Gapped BLAST and PSI-BLAST: a new generation of protein database search
+programs",  Nucleic Acids Res. 25:3389-3402.
+
+
+Reference for compositional score matrix adjustment: Altschul, Stephen F., 
+John C. Wootton, E. Michael Gertz, Richa Agarwala, Aleksandr Morgulis,
+Alejandro A. Schaffer, and Yi-Kuo Yu (2005) "Protein database searches
+using compositionally adjusted substitution matrices", FEBS J. 272:5101-5109.
+
+
+Reference for composition-based statistics starting in round 2:
+Schaffer, Alejandro A., L. Aravind, Thomas L. Madden,
+Sergei Shavirin, John L. Spouge, Yuri I. Wolf,  
+Eugene V. Koonin, and Stephen F. Altschul (2001), 
+"Improving the accuracy of PSI-BLAST protein database searches with 
+composition-based statistics and other refinements",  Nucleic Acids Res. 29:2994-3005.
+
+Query= leffe.pcons5563.1A88_A.hhpred2.7.pdb
+         (26 letters)
+
+Database: uniref90.fasta 
+           6,607,042 sequences; 2,283,562,333 total letters
+
+Searching..................................................done
+
+
+Results from round 1
+
+
+                                                                 Score    E
+Sequences producing significant alignments:                      (bits) Value
+
+UniRef90_Q03HU7 Adhesion exoprotein n=1 Tax=Pediococcus pentosac...    52   2e-05
+
+Searching..................................................done
+
+
+Results from round 2
+
+
+                                                                 Score    E
+Sequences producing significant alignments:                      (bits) Value
+Sequences used in model and found again:
+
+UniRef90_Q03HU7 Adhesion exoprotein n=1 Tax=Pediococcus pentosac...    47   4e-04
+
+Sequences not found previously or not previously below threshold:
+
+
+CONVERGED!
+  Database: uniref90.fasta
+    Posted date:  Apr 19, 2010 11:41 AM
+  Number of letters in database: 999,999,971
+  Number of sequences in database:  2,629,920
+  
+  Database: /scratch/DB/uniref90.fasta.01
+    Posted date:  Apr 19, 2010 11:45 AM
+  Number of letters in database: 999,999,618
+  Number of sequences in database:  3,245,546
+  
+  Database: /scratch/DB/uniref90.fasta.02
+    Posted date:  Apr 19, 2010 11:46 AM
+  Number of letters in database: 283,562,744
+  Number of sequences in database:  731,576
+  
+Lambda     K      H
+   0.311    0.130    0.356 
+
+Lambda     K      H
+   0.267   0.0401    0.140 
+
+
+Matrix: BLOSUM62
+Gap Penalties: Existence: 11, Extension: 1
+Number of Hits to DB: 194,912,988
+Number of Sequences: 6607042
+Number of extensions: 2508632
+Number of successful extensions: 6828
+Number of sequences better than 10.0: 1
+Number of HSP's better than 10.0 without gapping: 2
+Number of HSP's successfully gapped in prelim test: 0
+Number of HSP's that attempted gapping in prelim test: 6814
+Number of HSP's gapped (non-prelim): 14
+length of query: 26
+length of database: 2,283,562,333
+effective HSP length: 1
+effective length of query: 25
+effective length of database: 2,276,955,291
+effective search space: 56923882275
+effective search space used: 56923882275
+T: 11
+A: 40
+X1: 16 ( 7.2 bits)
+X2: 38 (14.6 bits)
+X3: 64 (24.7 bits)
+S1: 42 (21.8 bits)
+S2: 73 (32.8 bits)

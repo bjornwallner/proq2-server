@@ -1,0 +1,8 @@
+z_coord.pl
+
+Calculates the membrane normal and center based on the topology
+definition and calculates the projection to the normale (z-coord)
+
+-pdb <pdbfile>
+-topo <topology file (fasta format)>
+

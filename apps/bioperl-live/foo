@@ -1,0 +1,47 @@
+# .bashrc
+
+# User specific aliases and functions
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+#  export LD_LIBRARY_PATH=/modules.old/languages/perl/lib/alpha/5.00404/
+
+# alias wp=/modules/utils/wordperfect/linux/wpbin/xwp
+# alias rasmol=/modules/scientific/rasmol/linux/bin/rasmol_24bit
+# alias spdbv=/modules/scientific/spdv36/SPDBV/bin/spdbv
+alias soffice=/home/ae/arne/staroffice52/soffice 
+# alias rasmol=/modules/scientific/rasmol/2.7/linux/bin/rasmol_32BIT
+export CVSROOT=/home/gvh/arne/cvs/
+export EDITOR=emacs
+# export THREAD_DIR=/modules/seqtools/threader/v2.6/
+# export ICMHOME=/home/bpn/bpn/opt/icml/
+# export ICMSCRIPTDIR=/home/bpn/bpn/opt/icml/
+
+export PILORATE=115192
+export PATH=$PATH:/usr/athena/bin:/usr/athena/bin:
+
+
+export PERL5LIB=/afs/pdc.kth.se/home/a/arnee/MODULES/perl5
+
+export CVS_RSH=ssh
+#export CVSROOT=:ext:elofsson@bio.perl.org:/home/repository/bioperl
+
+
+# SHELLOPTS=braceexpand:hashall:histexpand:monitor:history:interactive-comments:emacs
+
+# AFS info
+export AFSHOME=/afs/pdc.kth.se/home/a/arnee/
+export SBCUSERS=/afs/pdc.kth.se/i386_linux62/cluster/clusters/sbc/cluster_users
+
+# For Modules
+export ARCH=`arch`
+export MODULEPATH=/afs/pdc.kth.se/home/a/arnee/modules/perl/:/afs/pdc.kth.se/home/a/arnee/modules/$ARCH/:/usr/local/lib/module/modules
+export MODULESHOME=/usr/local/lib/module
+
+function module() 
+{ 
+    eval `$MODULESHOME/modulecmd bash $*`
+}

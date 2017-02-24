@@ -1,0 +1,17 @@
+/AARange.pm/1.9/Mon Jun 18 08:27:53 2001//
+/Chain.pm/1.12/Mon Jun 18 08:27:53 2001//
+/ChainI.pm/1.8/Tue Jun 19 16:06:44 2001//
+/DNA.pm/1.8/Mon Jun 18 08:27:53 2001//
+/Exon.pm/1.8/Mon Jun 18 08:27:53 2001//
+/Gene.pm/1.13/Mon Jun 18 08:27:53 2001//
+/Intron.pm/1.7/Mon Jun 18 08:27:53 2001//
+/Mutation.pm/1.4/Wed May 16 14:57:38 2001//
+/Mutator.pm/1.19/Wed Jun 20 14:20:20 2001//
+/Prim_Transcript.pm/1.7/Mon Jun 18 08:27:53 2001//
+/Range.pm/1.7/Mon Jun 18 08:27:53 2001//
+/Repeat_Region.pm/1.7/Mon Jun 18 08:27:53 2001//
+/Repeat_Unit.pm/1.7/Mon Jun 18 08:27:53 2001//
+/SeqI.pm/1.19/Tue Jun 19 16:06:44 2001//
+/Transcript.pm/1.13/Wed May 16 14:57:38 2001//
+/Translation.pm/1.9/Mon Jun 18 08:27:53 2001//
+D

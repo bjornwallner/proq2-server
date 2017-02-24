@@ -1,0 +1,260 @@
+1 ATOM 1
+2 ATOM 2
+3 ATOM 3
+4 ATOM 4
+5 ATOM 5
+6 ATOM 6
+7 ATOM 7
+8 ATOM 8
+9 ATOM 9
+10 ATOM 10
+11 ATOM 11
+12 ATOM 12
+13 ATOM 13
+14 ATOM 14
+15 ATOM 15
+16 ATOM 16
+17 ATOM 17
+18 ATOM 18
+19 ATOM 19
+20 ATOM 20
+21 ATOM 21
+22 ATOM 22
+23 ATOM 23
+24 ATOM 24
+25 ATOM 25
+26 ATOM 26
+27 ATOM 27
+28 ATOM 28
+29 ATOM 29
+30 ATOM 30
+31 ATOM 31
+32 ATOM 32
+33 ATOM 33
+34 ATOM 34
+35 ATOM 35
+36 ATOM 36
+37 ATOM 37
+38 ATOM 38
+39 ATOM 39
+40 ATOM 40
+41 ATOM 41
+42 ATOM 42
+43 ATOM 43
+44 ATOM 44
+45 ATOM 45
+46 ATOM 46
+47 ATOM 47
+48 ATOM 48
+49 ATOM 49
+50 ATOM 50
+51 ATOM 51
+52 ATOM 52
+53 ATOM 53
+54 ATOM 54
+55 ATOM 55
+56 ATOM 56
+57 ATOM 57
+58 ATOM 58
+59 ATOM 59
+60 ATOM 60
+61 ATOM 61
+62 ATOM 62
+63 ATOM 63
+64 ATOM 64
+65 ATOM 65
+66 ATOM 66
+67 ATOM 67
+68 ATOM 68
+69 ATOM 69
+70 ATOM 70
+71 ATOM 71
+72 ATOM 72
+73 ATOM 73
+74 ATOM 74
+75 ATOM 75
+76 ATOM 76
+77 ATOM 77
+78 ATOM 78
+79 ATOM 79
+80 ATOM 80
+81 ATOM 81
+82 ATOM 82
+83 ATOM 83
+84 ATOM 84
+85 ATOM 85
+86 ATOM 86
+87 ATOM 87
+88 ATOM 88
+89 ATOM 89
+90 ATOM 90
+91 ATOM 91
+92 RES 1
+93 RES 2
+94 RES 3
+95 RES 4
+96 RES 5
+97 RES 6
+98 RES 7
+99 RES 8
+100 RES 9
+101 RES 10
+102 RES 11
+103 RES 12
+104 RES 13
+105 RES 14
+106 RES 15
+107 RES 16
+108 RES 17
+109 RES 18
+110 RES 19
+111 RES 20
+112 RES 21
+113 SURF25 1
+114 SURF25 2
+115 SURF25 3
+116 SURF25 4
+117 SURF25 5
+118 SURF25 6
+119 SURF50 1
+120 SURF50 2
+121 SURF50 3
+122 SURF50 4
+123 SURF50 5
+124 SURF50 6
+125 SURF75 1
+126 SURF75 2
+127 SURF75 3
+128 SURF75 4
+129 SURF75 5
+130 SURF75 6
+131 SURF100 1
+132 SURF100 2
+133 SURF100 3
+134 SURF100 4
+135 SURF100 5
+136 SURF100 6
+137 stride helix -4
+138 stride sheet -4
+139 stride coil -4
+140 stride helix -3
+141 stride sheet -3
+142 stride coil -3
+143 stride helix -2
+144 stride sheet -2
+145 stride coil -2
+146 stride helix -1
+147 stride sheet -1
+148 stride coil -1
+149 stride helix 0
+150 stride sheet 0
+151 stride coil 0
+152 stride helix 1
+153 stride sheet 1
+154 stride coil 1
+155 stride helix 2
+156 stride sheet 2
+157 stride coil 2
+158 stride helix 3
+159 stride sheet 3
+160 stride coil 3
+161 stride helix 4
+162 stride sheet 4
+163 stride coil 4
+164 stride helix 5
+165 stride sheet 5
+166 stride coil 5
+167 stride helix 6
+168 stride sheet 6
+169 stride coil 6
+170 ss 1
+171 ss_sc
+172 topology -4
+173 topology -3
+174 topology -2
+175 topology -1
+176 topology 0
+177 topology 1
+178 topology 2
+179 topology 3
+180 topology 4
+181 topology 5
+182 topology 6
+183 zpred (normalized (z-5)/20
+184 z (normalized (z-5)/20
+185 entropy -4
+186 entropy -3
+187 entropy -2
+188 entropy -1
+189 entropy 0
+190 entropy 1
+191 entropy 2
+192 entropy 3
+193 entropy 4
+194 entropy 5
+195 entropy 6
+196 profile 0
+197 profile 0
+198 profile 0
+199 profile 0
+200 profile 0
+201 profile 0
+202 profile 0
+203 profile 0
+204 profile 0
+205 profile 0
+206 profile 0
+207 profile 0
+208 profile 0
+209 profile 0
+210 profile 0
+211 profile 0
+212 profile 0
+213 profile 0
+214 profile 0
+215 profile 0
+216 profile 1
+217 profile 1
+218 profile 1
+219 profile 1
+220 profile 1
+221 profile 1
+222 profile 1
+223 profile 1
+224 profile 1
+225 profile 1
+226 profile 1
+227 profile 1
+228 profile 1
+229 profile 1
+230 profile 1
+231 profile 1
+232 profile 1
+233 profile 1
+234 profile 1
+235 profile 1
+236 profile 2
+237 profile 2
+238 profile 2
+239 profile 2
+240 profile 2
+241 profile 2
+242 profile 2
+243 profile 2
+244 profile 2
+245 profile 2
+246 profile 2
+247 profile 2
+248 profile 2
+249 profile 2
+250 profile 2
+251 profile 2
+252 profile 2
+253 profile 2
+254 profile 2
+255 profile 2
+256 rsa 1
+257 prsa 1
+258 rsa_sc
+259 terminiN
+260 terminiC

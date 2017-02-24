@@ -1,0 +1,222 @@
+#!/usr/bin/perl -w
+use strict;
+use File::Basename;
+# This is a fire and forget implementation of ProQM 
+# that will run all billions of external programs
+# and produce a fantastic result!!!!
+
+# all files will be produced in the directory where the pdb lies
+my $caspdir="/afs/pdc.kth.se/home/b/bjornw/CASP9/";
+my $casp8dir="/afs/pdc.kth.se/home/b/bjornw/CASP9/casp8/";
+
+my $SVM_MODEL_DIR="/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/ProQ2/data/";
+my $SVM_CLASSIFY="/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/svm_light/svm_classify";
+my $pdb=$ARGV[0];
+my $overwrite="";
+print $pdb."\n";
+my $target_length;
+
+#my $email_file=$ARGV[1];
+if(defined($ARGV[1])) {
+    if($ARGV[1] =~/overwrite/) {
+	$overwrite="-overwrite";
+
+    }
+}
+#my @temp=split(/\//,$pdb);
+my $folder=dirname($pdb);
+my $pdb_base=basename($pdb);
+my $outfile="$folder/$pdb_base.proq2";
+if(-e $outfile && length($overwrite)==0) {
+    print "$outfile exists. If you want to rerun add the flag -overwrite as second argument\n";
+    exit;
+}
+#print $folder."\n";
+if($pdb=~/(T0\d\d\d)/) {
+    my $target=$1;
+    
+    my $num=$target;
+    $num=~s/^T0//g;
+    if($num<=514) {
+	$caspdir=$casp8dir;
+    }
+    my $sequence_file="$caspdir/$target/sequence";
+    my $seq=`cat $sequence_file`;
+    chomp($seq);
+    $target_length=length($seq);
+} 
+else
+{
+    print STDERR "Need to have casp target T0XXX in the path somewhere...\n";
+    exit;
+}
+#print $folder."\n";
+ 
+#print "/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/ProQ2/bin/run_all_external.pl $pdb\n";
+#system("/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/ProQ2/bin/run_all_external.pl $pdb");
+#print "/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/ProQ2/bin/run_all_external2.pl $pdb $overwrite\n";
+#system("/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/ProQ2/bin/run_all_external2.pl $pdb $overwrite");`;# -overwrite`;
+`/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/ProQ2/bin/run_all_external.pl $pdb $overwrite`; ## -overwrite`;
+#print "/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -Sscore 3 -ac 4 -atom 1 -entropy 11 -profile 3 -prsa 1 -pw 1 -pwin 21 -rc 6 -res 1 -restypes 6 -rsa 1 -rsa_sc 21 -ss 1 -ss_sc 21 -stride 11 -surf100 1 -surf25 1 -surf50 1 -surf75 1 -termini 23 -topology 11 -z 1 -z_sc 0 -zpred 1\n";
+`/afs/pdc.kth.se/home/b/bjornw/CASP9/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1`;
+
+
+my $svm_para_file="$folder/svmdata-Sscore3-ac4-atom1-entropy3-grsa_sc1-gss_sc1-profile0-prsa0-pw1-pwin23-rc6-res1-restypes6-rsa13-rsa_sc21-ss1-ss_sc21-stride5-surf1001-surf251-surf501-surf751-termini5-topology0-z0-z_sc0-zpred0/$pdb_base.svm";
+#svmdata-Sscore3-ac4-atom1-entropy11-profile3-prsa1-pw1-pwin21-rc6-res1-restypes6-rsa1-rsa_sc21-ss1-ss_sc21-stride11-surf1001-surf251-surf501-surf751-termini23-topology11-z1-z_sc0-zpred1/$pdb_base.svm";
+if(!-e $svm_para_file) {
+
+    print STDERR "Something went wrong skipping... no worries the model probably suck!\n";
+    exit;
+}
+my $svm_pred_base=$svm_para_file.".pred"; 
+#if(1==0) {
+for(my $i=1;$i<=5;$i++) {
+
+    #print "Classifying using model.$i ...\n";
+    
+   # print "$SVM_CLASSIFY $svm_para_file $SVM_MODEL_DIR/model.linear.$i $svm_pred_base.$i\n";
+    `$SVM_CLASSIFY $svm_para_file $SVM_MODEL_DIR/model.linear.$i $svm_pred_base.$i`;
+    
+}
+#}
+
+my %pred=();
+for(my $i=1;$i<=5;$i++) {
+
+    #print "$svm_pred_base.$i\n";
+    open(FILE,"$svm_pred_base.$i");
+    while(<FILE>) {
+	chomp;
+	push(@{$pred{$i}},$_);
+    }
+    close(FILE);
+}
+
+
+
+
+my @mean=();
+my @std=();
+for(my $j=0;$j<scalar(@{$pred{1}});$j++) {
+    my @vec=();
+    for(my $i=1;$i<=5;$i++) {
+	push(@vec,$pred{$i}[$j]);
+
+    }
+    push(@mean,mean(@vec));
+    push(@std,std(@vec));
+    
+
+}
+my $global_quality=sum(@mean);
+my $global_quality_norm=$global_quality/$target_length;
+
+
+
+#my $email_body="Predicted quality [0,1] , 0-worst, 1-best\n\n";
+#$email_body.="Global Quality: $global_quality\n";
+#$email_body.="Local Quality:\n";
+open(OUT,">$outfile");
+print OUT "# first column pos, second column average of five last. third column std of five last\n";
+for(my $j=0;$j<scalar(@{$pred{1}});$j++) {
+    printf OUT ("%-5d %10.7f %10.7f ",$j+1,$mean[$j],$std[$j]);
+    #$email_body.=sprintf("%-5d %-10.7f\n",$j+1,$mean[$j]);
+    for(my $i=1;$i<=5;$i++) {
+	printf OUT ("%10.7f ",$pred{$i}[$j]);
+
+    }
+    printf OUT ("\n");
+}
+printf OUT ("Global quality: %10.7f sum= %10.7f L= %4d\n",$global_quality_norm,$global_quality,$target_length);
+close(OUT);
+print "Output printed to $folder/$pdb_base.proq2\n"; #$folder/pred.all\n";
+#
+#open(OUT,">$folder/pred.all.gnu");
+#print OUT "set terminal png font times\n";
+#print OUT "set output '$folder/pred.png'\n";
+#print OUT "set xlabel 'sequence position'\n";
+#print OUT "set ylabel 'predicted quality, 1-best 0-worst'\n";
+#print OUT "plot '$folder/pred.all' u 1:2 w l lw 1 title 'raw','' u 1:2 w l lw 2 smooth bezier title 'smoothed'\n";
+#close(OUT);
+#system("/opt/local/bin/gnuplot $folder/pred.all.gnu");
+#
+##send email with result.
+#
+#my $email=`cat $email_file | head`;
+#my $target_name=`cat $folder/name|head`;
+#
+#chomp($email);
+#chomp($target_name);
+#if(length($target_name)>0) {
+#    $target_name="for $target_name";
+#}
+#open(EMAIL,">$folder/results.email");
+#print EMAIL "From: ProQM\@cbr.su.se\n";
+#print EMAIL "Subject: Local Quality Prediction ProQM-server Results $target_name\n";
+#print EMAIL "To: $email\n";
+#print EMAIL $email_body;
+#close(EMAIL);
+#
+#
+#
+#`cat $folder/results.email | /usr/sbin/sendmail -t`;
+
+
+sub std
+{
+    my @data=@_;
+    my $mean=mean(@data);
+    my $n=scalar(@data);
+    if($n!=1)
+    {
+	my $sum=0;
+	foreach my $term(@data)
+	{
+	    $sum+=($term-$mean)*($term-$mean);
+	}
+	return sqrt(1/($n-1)*$sum);
+    }
+    else
+    {
+	return 0;
+    }
+}
+
+sub mean
+{
+    my @data=@_;
+    my $sum=0;
+    my $number_of_elements=scalar @data;
+    foreach my $term(@data)
+    {
+	$sum+=$term;
+    }
+    if($number_of_elements==0)
+    {
+	return 0;
+    }
+    else
+    {
+	return $sum/$number_of_elements;
+    }
+}
+
+
+sub sum
+{
+    my @data=@_;
+    my $sum=0;
+    my $number_of_elements=scalar @data;
+    foreach my $term(@data)
+    {
+	$sum+=$term;
+    }
+    if($number_of_elements==0)
+    {
+	return 0;
+    }
+    else
+    {
+	return $sum;
+    }
+}

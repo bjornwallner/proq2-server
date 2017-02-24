@@ -1,0 +1,14 @@
+filename             Various compiled executables according to the operating system 
+update               5-Feb-1996
+version              1.0
+size                 -
+compressed           -
+ASCII conversion     -
+author               Frishman, D. and Argos, P.
+description          Protein secondary structure assignment from 
+		     atomic coordinates
+literature           Proteins: Structure, Function and Genetics, (1995), 
+                     in press.
+source code          C
+sw requirements      ANSI C compiler or GNU C compiler
+hw requirements      -

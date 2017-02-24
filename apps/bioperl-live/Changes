@@ -1,0 +1,245 @@
+$Id: Changes,v 1.12 2001/03/02 18:24:58 jason Exp $
+Revision history for Bioperl core modules
+
+0.7  Large number of changes, including refactoring of the
+     Object system, new parsers, new functionality and
+     all round better system. Highlights are:
+
+
+     o Refactored root of inheritance: moved to a lightweight Bio::Root::RootI;
+       Bio::Root::IO for I/O and file/handle capabilities.
+
+     o Imported BPlite modules from Ian Korf for BLAST
+       parsing. This is considered the supported BLAST parser;
+       Bio::Tools::Blast.pm will eventually phase out due to lack of support.
+
+     o Improved Sequence Feature model. Added complete location
+       modelling (with fuzzy and compound locations).  See
+       Bio::LocationI and the modules under Bio/Location.  Added
+       support in Genbank/EMBL format parsing to completely parse
+       feature tables for complex locations.
+
+     o Moved special support for databanks etc to specialized modules under
+       Bio/Seq/. One of these supports very large sequences through 
+       a temporary file as a backend.
+
+     o Explicit Gene, Transcript and Exon SeqFeature objects, supporting
+       CDS retrieval and exon shuffling.
+
+     o More parsers: Sim4, Genscan, MZEF, ESTScan, BPbl2seq, GFF
+
+     o Refactored Bio/DB/GenBank+GenPept. There is now also DB/SwissProt and
+       DB/GDB (the latter has platform-specific limitations).
+
+     o New analysis parser framework for HT sequence annotation (see
+       Bio::SeqAnalysisParserI and Bio::Factory::SeqAnalysisParserFactory)
+
+     o New Alignment IO framework
+
+     o New Index modules (Swissprot)
+
+     o New modules for running Blast within perl
+       (Bio::Tools::Run::StandAloneBlast). Added modules for running
+       Multiple Sequence Alignment tools ClustalW and TCoffee
+       (Bio::Tools::Run::Alignment).
+
+     o New Cookbook-style tutorial (see bptutorial.pl). Improved
+       documentation across the package.
+
+     o Much improved cross platform support. Many known incompatibilities
+       have been fixed; however, NT and Mac do not work across the entire
+       setup (see PLATFORMS).
+
+     o Many bug fixes, code restructuring, etc. Overall stability and
+       maintainability benefit a lot.
+
+     o A total of 957 automatic tests
+    
+
+0.6.2  
+
+   There are very few functionality changes but a large
+   number of software improvements/bug fixes across the package.
+
+   o The EMBL/GenBank parsing are improved.
+ 
+   o The Swissprot reading is improved. Swissprot writing
+     is disabled as it doesn't work at all. This needs to
+     wait for 0.7 release
+ 
+   o BLAST reports with no hits are correctly parsed.
+ 
+   o Several other bugs of the BLAST parser (regular expressions, ...)
+     fixed.
+
+   o Old syntax calls have been replaced with more modern syntax
+ 
+   o Modules that did not work at all, in particular the Sim4
+     set have been removed
+
+   o Bio::SeqFeature::Generic and Bio::SeqFeature::FeaturePair
+     have improved compliance with interface specs and documentation
+
+   o Mailing list documentation updated throughout the distribution
+
+   o Most minor bug fixes have happened.
+
+   o The scripts in /examples now work and have the modern syntax
+     rather than the deprecated syntax
+
+
+0.6.1  Sun April 2 2000
+
+   o Sequences can have Sequence Features attached to them
+        - The sequence features can be read from or written to
+          EMBL and GenBank style flat files
+
+   o Objects for Annotation, including References (but not
+     full medline abstracts), Database links and Comments are
+     provided
+
+   o A Species object to represent nodes on a taxonomy tree
+     is provided
+
+   o The ability to parse HMMER and Sim4 output has been added
+
+   o The Blast parsing has been improved, with better PSI-BLAST
+     support and better overall behaviour.
+
+   o Flat file indexed databases provide both random access 
+     and sequential access to their component sequences.
+
+   o A CodonTable object has been written with all known 
+     CodonTables accessible.
+
+   o A number of new lightweight analysis tools have been
+     added, such as molecular weight determination.
+
+    The 0.6 release also has improved software engineering
+  
+   o The sequence objects have been rewritten, providing more
+     maintainable and easier to implement objects. These
+     objects are backwardly compatible with the 0.05.1 objects
+
+   o Many objects are defined in terms of interfaces and then  
+     a Perl implementation has been provided. The interfaces
+     are found in the 'I' files (module names ending in 'I').
+
+     This means that it is possible to wrap C/CORBA/SQL access
+     as true "bioperl" objects, compatible with the rest of
+     bioperl.
+
+   o The SeqIO system has been overhauled to provide better
+     processing and perl-like automatic interpretation of <>
+     over arguments.
+
+   o Many more tests have been added (a total of 172 automatic
+     tests are now run before release).
+
+
+
+0.05.1 Tue Jun 29 05:30:44 1999
+        - Central distribution now requires Perl 5.004. This was
+          done to get around 5.003-based problems in Bio/Index/* 
+          and SimpleAlign.
+        - Various bug fixes in the Bio::Tools::Blast modules
+          including better exception handling and PSI-Blast 
+          support. See Bio/Tools/Blast/CHANGES for more.
+        - Fixed the Parse mechanism in Seq.pm to use readseq.
+	  Follow the instructions in README for how to install
+	  it (basically, you have to edit Parse.pm).
+        - Improved documentation of Seq.pm, indicating where 
+          objects are returned and where strings are returned.
+        - Fixed uninitialized warnings in Bio::Root::Object.pm
+          and Bio::Tools::SeqPattern.pm.
+        - Bug fixes for PR#s: 30,31,33-35,41,42,44,45,47-50,52.
+
+0.05  Sun Apr 25 01:14:11 1999
+        - Bio::Tools::Blast modules have less memory problems
+          and faster parsing. Webblast uses LWP and supports
+          more functionality. See Bio/Tools/Blast/CHANGES for more.
+        - The Bio::SeqIO system has been started, moving the
+          sequence reformatting code out of the sequence object
+        - The Bio::Index:: system has been started, providing
+          generic index capabilities and specifically works for
+          Fasta formatted databases and EMBL .dat formatted 
+	  databases
+        - The Bio::DB:: system started, providing access to 
+          databases, both via flat file + index (see above) and
+          via http to NCBI
+        - The scripts/ directory, where industrial strength scripts
+          are put has been started.
+        - Many changes - a better distribution all round.
+
+0.04.4  Wed Feb 17 02:20:13 1999
+	- Bug fixes in the Bio::Tools::Blast modules and postclient.pl
+	  (see Bio::Tools::Blast::CHANGES).
+        - Fixed a bug in Bio::Tools::Fasta::num_seqs().
+        - Beefed up the t/Fasta.t test script.
+        - Small fix in Bio::Seq::type() (now always returns a string).
+        - Changed Bio::Root::Utilities::get_newline_char() to 
+          get_newline() since it could return more than one char.
+        - Added $NEWLINE and $TIMEOUT_SECS to Bio::Root::Global.
+        - Changed default timeout to 20 seconds (was 3).
+        - Moved lengthy modification notes to the bottom of some files.
+	- Fixed SimpleAlign write_fasta bug.
+	- Beefed up SimpleAlign.t test
+
+0.04.3  Thu Feb  4 07:48:53 1999
+        - Bio::Root::Object.pm and Global.pm now detect when
+          script is run as a CGI and suppress output that is only
+          appropriate when running interactively.
+        - Bio::Root::Err::_set_context() adds name of script ($0).
+        - Added comments in Bio::Tools::WWW.pm and Bio::Root::Utilities.pm
+          regarding the use of the static objects via the qw(:obj) tag.
+        - Fixed the ambiguous reverse calls in Seq.pm and UnivAln.pm to 
+          CORE::reverse, avoiding Perl warnings.
+        - Bug fixes in Bio::Tools::Blast modules (version 0.074) and 
+          example scripts (see Bio::Tools::Blast::CHANGES).
+        - examples/seq/seqtools.pl no longer always warns about using 
+          -prot or -nucl command-line arguments; only when using the 
+          -debug argument.
+        - Methods added to Bio::Root::Utilities: create_filehandle(), 
+          get_newline_char(), and taste_file() to generalize filehandle 
+          creation and autodetect newline characters in files/streams
+          (see bug report #19).
+        - Bio::Root::IOManager::read() now handles timeouts and uses
+          Utilities::create_filehandle().
+        - Bio::Tools::Fasta.pm uses Utilities::get_newline_char() instead
+          of hardwiring in "\n".
+        - Bug fixes in the Bio::SimpleAlign and Bio::Tools::pSW
+
+0.04.2  Wed Dec 30 02:27:36 1998
+        - Bug fixes in Bio::Tools::Blast modules, version 0.073
+          (see Bio::Tools::Blast::CHANGES).
+        - Changed reverse calls in Bio/Seq.pm and Bio/UnivAln.pm
+          to CORE::reverse (prevents ambiguous warnings with 5.005).
+        - Appending '.tmp.bioperl' to temporary files created by
+          Bio::Root::Utilities::compress() or uncompress() to
+          make it easy to identify & cleanup these files as needed.
+        - Developers: Created CVS branch release-0-04-bug from
+          release-0-04-1. Before making bug fixes to the 0.04.1 release,
+          be sure to cvs checkout this branch into a clean area.
+
+0.04.1  Wed Dec 16 05:39:15 1998
+        - Bug fixes in Bio::Tools::Blast modules, version 0.072
+          (see Bio::Tools::Blast::CHANGES).
+        - Compile/SW/Makefile.PL now removes *.o and *.a files 
+          with make clean.
+
+0.04  Tue Dec  8 07:49:19 1998
+        - Lots of new modules added including:
+           * Ewan Birney's Bio::SimpleAlign.pm, Bio::Tools::AlignFactory.pm,
+             and Bio/Compile directory containing XS-linked C code for
+             creating Smith-Waterman sequence alignments from within Perl.
+           * Steve Chervitz's Blast distribution has been incorporated.
+           * Georg Fuellen's Bio::UnivAln.pm for multiple alignment objects.
+        - Bio/examples directory for demo scripts for all included modules.
+        - Bio/t directory containing test suit for all included modules.
+        - For changes specific to the Blast-related modules prior to
+          incorporation in this central distribution, see the CHANGES
+          file in the Bio/Tools/Blast directory.
+     
+0.01  Tue Sep  8 14:23:22 1998
+        - original version from central CVS tree; created by h2xs 1.18
+

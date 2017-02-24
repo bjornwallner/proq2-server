@@ -1,0 +1,44 @@
+REM  -------------------- Secondary structure summary -------------------  ~~~~
+REM                                                                        ~~~~
+CHN  pcons5563.1A88_A.hhpred2.7.pdb -                                      ~~~~
+REM                                                                        ~~~~
+REM                .         .                                             ~~~~
+SEQ  1    GGVVSSDGKTVTITFAADDSDNVVIH                           26          ~~~~
+STR        EEETTTT EEE     TTTT                                            ~~~~
+REM                                                                        ~~~~
+REM                                                                        ~~~~
+REM                                                                        ~~~~
+LOC  Strand       GLY    51 -      VAL     53 -                            ~~~~
+LOC  Strand       THR    59 -      THR     61 -                            ~~~~
+LOC  TurnIV       SER    54 -      GLY     57 -                            ~~~~
+LOC  TurnVIII     ASP    67 -      ASP     70 -                            ~~~~
+REM                                                                        ~~~~
+REM  --------------- Detailed secondary structure assignment-------------  ~~~~
+REM                                                                        ~~~~
+REM  |---Residue---|    |--Structure--|   |-Phi-|   |-Psi-|  |-Area-|      ~~~~
+ASG  GLY -   50    1    C          Coil    360.00   -128.28      75.1      ~~~~
+ASG  GLY -   51    2    E        Strand    139.37   -174.86      26.8      ~~~~
+ASG  VAL -   52    3    E        Strand   -145.66    166.06     100.5      ~~~~
+ASG  VAL -   53    4    E        Strand   -102.27    129.89     100.3      ~~~~
+ASG  SER -   54    5    T          Turn    -79.06   -178.28      42.8      ~~~~
+ASG  SER -   55    6    T          Turn    -54.96    -48.93     136.6      ~~~~
+ASG  ASP -   56    7    T          Turn    -79.37   -150.41     106.3      ~~~~
+ASG  GLY -   57    8    T          Turn    -72.44    -29.10      60.1      ~~~~
+ASG  LYS -   58    9    C          Coil    -45.79    131.60     135.9      ~~~~
+ASG  THR -   59   10    E        Strand   -117.00    128.54      79.7      ~~~~
+ASG  VAL -   60   11    E        Strand    -90.54    143.54      68.1      ~~~~
+ASG  THR -   61   12    E        Strand   -110.41    138.58     110.1      ~~~~
+ASG  ILE -   62   13    C          Coil   -121.29    151.74     101.2      ~~~~
+ASG  THR -   63   14    C          Coil   -122.75    153.19     134.3      ~~~~
+ASG  PHE -   64   15    C          Coil   -141.17    158.26     181.6      ~~~~
+ASG  ALA -   65   16    C          Coil   -115.60    143.61      76.0      ~~~~
+ASG  ALA -   66   17    C          Coil    -71.93    134.19      99.3      ~~~~
+ASG  ASP -   67   18    T          Turn   -177.77    137.03      98.5      ~~~~
+ASG  ASP -   68   19    T          Turn    -63.90    -51.55     163.5      ~~~~
+ASG  SER -   69   20    T          Turn    -82.95    131.60      74.5      ~~~~
+ASG  ASP -   70   21    T          Turn   -117.93    132.16     105.7      ~~~~
+ASG  ASN -   71   22    C          Coil   -116.69    126.64     143.1      ~~~~
+ASG  VAL -   72   23    C          Coil   -123.47    139.42     115.0      ~~~~
+ASG  VAL -   73   24    C          Coil   -113.75    124.94     139.0      ~~~~
+ASG  ILE -   74   25    C          Coil   -123.01    119.96     143.6      ~~~~
+ASG  HIS -   75   26    C          Coil    -31.21    360.00     247.7      ~~~~

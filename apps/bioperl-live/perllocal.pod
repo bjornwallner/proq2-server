@@ -1,0 +1,22 @@
+=head2 Mon Apr 14 09:56:45 2003: C<Module> L<Bio::Ext::Align|Bio::Ext::Align>
+
+=over 4
+
+=item *
+
+C<installed into: /afs/pdc.kth.se/home/b/bjornw/bjorn/bioperl/bioperl-live/>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.1>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
