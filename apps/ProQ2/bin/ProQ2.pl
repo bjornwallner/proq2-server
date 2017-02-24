@@ -40,6 +40,7 @@ $sendemail=0 if($email_file=~/noemail/ ||
 
 my $folder=dirname(abs_path($pdb)); #join("/",@temp[0..$#temp-1]);
 my $seq_cache="$install_dir/server/output/cache/";
+`mkdir $seq_cache` if(!-e $seq_cache);
 my $pdb_base=basename($pdb); #$temp[$#temp];
 my @temp=split(/\//,$folder);
 my $jobid=$temp[$#temp];
