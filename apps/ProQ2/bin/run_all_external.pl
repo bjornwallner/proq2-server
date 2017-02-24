@@ -15,6 +15,11 @@ $caspTMRdir="/afs/pdc.kth.se/home/b/bjornw/CASP9/TMR/";
 $type=$ARGV[0]; #-fasta or -pdb
 $full_path=abs_path($ARGV[1]);
 
+my $script_path=dirname(abs_path($0));
+#print $script_path."\n";                                                       
+my $install_dir=abs_path("$script_path/../../../");
+#print $install_dir."\n";        
+
 #if(defined($ARGV[1]))
 #{
 #    if(not($ARGV[1]=~/overwrite/)) {
@@ -105,7 +110,7 @@ chomp($subunits);
 $subunits=1 if($subunits==0 || !$casp_target);
 
 `mv -f $pdb $pdb.orig`;
-`grep ^ATOM $pdb.orig | /local/www/services/ProQ2/apps/ProQ2/bin/kill_chain.pl  > $pdb`;
+`grep ^ATOM $pdb.orig | $install_dir/apps/ProQ2/bin/kill_chain.pl  > $pdb`;
 
 #if(!$casp_target)
 #fasta
@@ -113,7 +118,7 @@ $fasta="$pdb.fasta";
 if($type eq "-fasta") {
     `cp $pdb $fasta`;
 } else {
-    $seq=`/local/www/services/ProQ2/apps/ProQ2/bin/aa321CA.pl $pdb`;
+    $seq=`$install_dir/apps/ProQ2/bin/aa321CA.pl $pdb`;
     print $fasta."\n";
     if(!-e $fasta) {
 	print "Creating fasta file..\n";
@@ -175,22 +180,22 @@ if(!-e $profile_file || !-e $profile_mtx_file || !-e $ss2_file)
        !-e $target_ss2)
     {
 	print STDERR "Running PSI-BLAST (this will also create some input to accpro...)\n";
-	print "/local/www/services/ProQ2/bin/create_profile.sh $fasta\n";
-	`/local/www/services/ProQ2/bin/create_profile.sh $fasta`;
+	print "$install_dir/bin/create_profile.sh $fasta\n";
+	`$install_dir/bin/create_profile.sh $fasta`;
     } else { 
    
-	print "/local/www/services/ProQ2/apps/ProQ2/bin/profile_subset.pl $target_profile $fasta $profile_file\n";
+	print "$install_dir/apps/ProQ2/bin/profile_subset.pl $target_profile $fasta $profile_file\n";
 	#exit;
-	system("/local/www/services/ProQ2/apps/ProQ2/bin/profile_subset.pl $target_profile $fasta $profile_file $subunits");
-	system("/local/www/services/ProQ2/apps/ProQ2/bin/profile_subset.pl $target_profile_mtx $fasta $profile_mtx_file $subunits");
-	system("/local/www/services/ProQ2/apps/ProQ2/bin/ss2_subset.pl $target_ss2 $fasta $ss2_file $subunits");
+	system("$install_dir/apps/ProQ2/bin/profile_subset.pl $target_profile $fasta $profile_file $subunits");
+	system("$install_dir/apps/ProQ2/bin/profile_subset.pl $target_profile_mtx $fasta $profile_mtx_file $subunits");
+	system("$install_dir/apps/ProQ2/bin/ss2_subset.pl $target_ss2 $fasta $ss2_file $subunits");
     }
 
 }
 #exit;
 if(!-e "$pdb.stride") {
     print "stride\n";
-    `/local/www/services/ProQ2/apps/stride/linux/bin/stride $pdb.orig >$pdb.stride`;
+    `$install_dir/apps/stride/linux/bin/stride $pdb.orig >$pdb.stride`;
 }
 
 
@@ -203,7 +208,7 @@ if(!-e $naccessfile) {
     #print "ln -s $path/$pdb $tmpfile.pdb\n";
     #print "$tmpfile\n";
     #exit;
-    `/local/www/services/ProQ2/apps/naccess/naccess $tmpfile.pdb`;
+    `$install_dir/apps/naccess/naccess $tmpfile.pdb`;
 #print "$tmpfile.rsa\n";
     if(1==0) {
 	open(RSA,"$tmpfile.rsa");
@@ -249,11 +254,11 @@ if(!-e $accfile) {
     }
     if(!-e $target_acc) {
 
-	#system("/local/www/services/ProQ2/apps/sspro4/bin/predict_acc.sh $fasta $accfile");
-	`/local/www/services/ProQ2/apps/sspro4/bin/predict_acc.sh $fasta $accfile`;
+	#system("$install_dir/apps/sspro4/bin/predict_acc.sh $fasta $accfile");
+	`$install_dir/apps/sspro4/bin/predict_acc.sh $fasta $accfile`;
     } else {
 	print "subset with $target_acc\n";
-	system("/local/www/services/ProQ2/apps/ProQ2/bin/acc_subset.pl $target_acc $fasta $accfile $subunits");
+	system("$install_dir/apps/ProQ2/bin/acc_subset.pl $target_acc $fasta $accfile $subunits");
     }
     
 }
@@ -277,11 +282,11 @@ if(!-e $proqoutfile_gz)
     print "ProQres...\n";
     
     if(-e "/Users/bjorn/") {
-	`export PROQRESDIR=/local/www/services/ProQ2/apps/ProQres/weights; /local/www/services/ProQ2/apps/ProQres/bin/ProQres -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input > $TMP/$proqoutfile.$$`;
+	`export PROQRESDIR=$install_dir/apps/ProQres/weights; $install_dir/apps/ProQres/bin/ProQres -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input > $TMP/$proqoutfile.$$`;
     } else {
 
-	print "export PROQRESDIR=/local/www/services/ProQ2/apps/ProQres/weights; /local/www/services/ProQ2/apps/ProQres/bin/ProQres -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input\n";
-	`ulimit -s unlimited;export PROQRESDIR=/local/www/services/ProQ2/apps/ProQres/weights; /local/www/services/ProQ2/apps/ProQres/bin/ProQres64 -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input > $TMP/$proqoutfile.$$`;
+	print "export PROQRESDIR=$install_dir/apps/ProQres/weights; $install_dir/apps/ProQres/bin/ProQres -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input\n";
+	`ulimit -s unlimited;export PROQRESDIR=$install_dir/apps/ProQres/weights; $install_dir/apps/ProQres/bin/ProQres64 -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input > $TMP/$proqoutfile.$$`;
     }
     `gzip $TMP/$proqoutfile.$$`;
     `mv $TMP/$proqoutfile.$$.gz $proqoutfile.gz`;
