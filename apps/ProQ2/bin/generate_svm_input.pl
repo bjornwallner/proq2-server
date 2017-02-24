@@ -1,6 +1,6 @@
 #!/usr/bin/perl  
 
-require '/tmp/proq2-server/apps/ProQ2/bin/stat.pl';
+require 'stat.pl';
 
 my @aa_order = split(//,'ACDEFGHIKLMNPQRSTVWY');my @altschul_mapping = (0,4,3,6,13,7,8,9,11,10,12,2,14,5,1,15,16,19,17,18);
 if(scalar(@ARGV)>0 && scalar(@ARGV)%2==1)

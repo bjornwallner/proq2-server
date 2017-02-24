@@ -128,7 +128,7 @@ if($cache_after) {
 #print "/local/www/services/ProQ2/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1\n";
 
 print "$install_dir/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1\n";
-`$install_dir/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1`;
+`export PERL5LIB=$install_dir/apps/ProQ2/bin;$install_dir/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1`;
 #system("/local/www/services/ProQ2/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1");
 
 
