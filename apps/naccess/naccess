@@ -3,8 +3,6 @@
 PDBFILE=$1
 EXE_FILE=`readlink -f $0`
 EXE_PATH=`dirname $EXE_FILE`;
-echo $EXE_PATH
-exit
 #EXE_PATH="/local/www/services/ProQ2/apps/naccess"
 VDWFILE="$EXE_PATH/vdw.radii"
 probe=1.40

@@ -1,5 +1,6 @@
-#!/usr/bin/perl -w 
-require '/local/www/services/ProQ2/apps/ProQ2/bin/stat.pl';
+#!/usr/bin/perl  
+
+require '/tmp/proq2-server/apps/ProQ2/bin/stat.pl';
 
 my @aa_order = split(//,'ACDEFGHIKLMNPQRSTVWY');my @altschul_mapping = (0,4,3,6,13,7,8,9,11,10,12,2,14,5,1,15,16,19,17,18);
 if(scalar(@ARGV)>0 && scalar(@ARGV)%2==1)
@@ -285,7 +286,7 @@ if(!$dir_is_file && !$rosetta && !$relax && !$casp7_test) {
 	    s/\.fixed//g;
 	    my @ids=split(/\s+/);
 #	my @ids=grep(/\.global/,@ids_all);
-	    @{$set2id{$set_number}}=() if(not(defined(@{$set2id{$set_number}})));
+#	    @{$set2id{$set_number}}=() if(not(defined(@{$set2id{$set_number}})));
 #	@{$set2id{$set_number}}=(@{$set2id{$set_number}},@ids);
 	    $c=0;
 	    foreach $id(@ids) {

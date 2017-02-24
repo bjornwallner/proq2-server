@@ -26,7 +26,7 @@ my $seqres_file=$ARGV[2];
 my $bfactorPDB=0;
 if(defined($ARGV[3])) {
     $bfactorPDB=1;
-    print "Will outout bfactorPDB!\n";
+    print "Will output bfactorPDB!\n";
 }
 
 my $sendemail=1;
@@ -86,7 +86,7 @@ if(length($seqres)>10) {
 	`$install_dir/apps/ProQ2/bin/run_all_external.pl -fasta $seqres_folder/seqres`;
 	print "Caching seqres...\n";
     } else {
-	print "seqres already in cache!\n";
+	print "seqres already in cache $seqres_folder!\n";
     }
     #collect subset data
 #    my $PERL5LIB="export PERL5LIB=/local/www/services/ProQ2/apps/ProQ2/bin";
@@ -97,7 +97,7 @@ if(length($seqres)>10) {
     `$install_dir/apps/ProQ2/bin/profile_subset.pl $seqres_folder/seqres.mtx $pdb.fasta $pdb.mtx`;
     `$install_dir/apps/ProQ2/bin/ss2_subset.pl $seqres_folder/seqres.ss2 $pdb.fasta $pdb.ss2`;
 } elsif(-e $pdbseq_folder) {
-    print "pdbseq already in cache!\n";
+    print "pdbseq already in cache $pdbseq_folder\n";
     `gunzip -f $pdbseq_folder/*.gz`;
     `cp $pdbseq_folder/seqres.acc $pdb.acc`;
     `cp $pdbseq_folder/seqres.psi $pdb.psi`;
@@ -126,6 +126,8 @@ if($cache_after) {
 
 
 #print "/local/www/services/ProQ2/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1\n";
+
+print "$install_dir/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1\n";
 `$install_dir/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1`;
 #system("/local/www/services/ProQ2/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1");
 
@@ -141,9 +143,9 @@ my $svm_pred_base=$svm_para_file.".pred";
 #if(1==0) {
 for(my $i=1;$i<=5;$i++) {
 
-    #print "Classifying using model.$i ...\n";
+#    print "Classifying using model.$i ...\n";
     
-   # print "$SVM_CLASSIFY $svm_para_file $SVM_MODEL_DIR/model.linear.$i $svm_pred_base.$i\n";
+#    print "$SVM_CLASSIFY $svm_para_file $SVM_MODEL_DIR/model.linear.$i $svm_pred_base.$i\n";
     `$SVM_CLASSIFY $svm_para_file $SVM_MODEL_DIR/model.linear.$i $svm_pred_base.$i`;
     
 }

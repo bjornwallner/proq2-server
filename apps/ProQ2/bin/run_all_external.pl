@@ -209,6 +209,7 @@ if(!-e $naccessfile) {
     #print "$tmpfile\n";
     #exit;
     `$install_dir/apps/naccess/naccess $tmpfile.pdb`;
+    print "$install_dir/apps/naccess/naccess $tmpfile.pdb\n";
 #print "$tmpfile.rsa\n";
     if(1==0) {
 	open(RSA,"$tmpfile.rsa");

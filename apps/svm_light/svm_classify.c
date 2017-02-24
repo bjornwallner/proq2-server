@@ -118,7 +118,7 @@ int main (int argc, char* argv[])
   }  
   free(line);
   free(words);
-  free_model(model,1);
+  //free_model(model,1);
 
   if(verbosity>=2) {
     printf("done\n");

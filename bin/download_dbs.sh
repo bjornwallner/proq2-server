@@ -6,4 +6,7 @@ tar -xvzf sspro4.db.tar.gz
 tar -xvzf DB.tar.gz
 cd apps/sspro4/
 ./configure.pl
-
+cd ../..
+cd apps/svm_light/
+make
+cd ../../
