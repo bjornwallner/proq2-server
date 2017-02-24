@@ -1,0 +1,19 @@
+CMD: ProQ2.pl /local/www/services/ProQ2/server/output/2017-02/job.ckoCeVNG/input.pdb /local/www/services/ProQ2/server/output/2017-02/job.ckoCeVNG/email /local/www/services/ProQ2/server/output/2017-02/job.ckoCeVNG/seqres -bfactorPDB
+Will outout bfactorPDB!
+/home/bjowa51/local/www/services/ProQ2/server/output/2017-02/job.ckoCeVNG
+casp_target=0
+run all for input.pdb in /home/bjowa51/local/www/services/ProQ2/server/output/2017-02/job.ckoCeVNG...
+input.pdb.fasta
+Creating profiles and predicting ss
+Running PSI-BLAST (this will also create some input to accpro...)
+Accpro
+input.pdb.fasta.blastpgp exist skipping psiblast stuff...
+ProQres...
+export PROQRESDIR=/local/www/services/ProQ2/apps/ProQres/weights; /local/www/services/ProQ2/apps/ProQres/bin/ProQres -pdb input.pdb -surf input.pdb.rsa -stride input.pdb.stride -psipred input.pdb.ss2 -prof input.pdb.psi -rc 6 -ac 4 -w 23 -t 6 -output_input
+Caching pdbseq...
+defined(@array) is deprecated at /local/www/services/ProQ2/apps/ProQ2/bin/generate_svm_input.pl line 288.
+	(Maybe you should just omit the defined()?)
+Output printed to /home/bjowa51/local/www/services/ProQ2/server/output/2017-02/job.ckoCeVNG/input.pdb.proq2
+Output printed to /home/bjowa51/local/www/services/ProQ2/server/output/2017-02/job.ckoCeVNG/svmdata-Sscore3-ac4-atom1-entropy3-grsa_sc1-gss_sc1-profile0-prsa0-pw1-pwin23-rc6-res1-restypes6-rsa13-rsa_sc21-ss1-ss_sc21-stride5-surf1001-surf251-surf501-surf751-termini5-topology0-z0-z_sc0-zpred0/input.pdb.svm.pred.all
+Could not find/open font when opening font times, trying default
+Bfactor

@@ -1,0 +1,1 @@
+../apps/ProQ2/bin/ProQ2.pl

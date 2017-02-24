@@ -1,0 +1,47 @@
+#!/usr/bin/perl -w                                                                                                                                           
+use File::Basename;
+
+use Cwd 'abs_path';
+my $script_path = dirname(abs_path($0));
+my $install_dir=abs_path("$script_path/../");
+my $base_outfolder="$install_dir/server/output/";
+$in_pdbfile=$ARGV[0];
+
+$in_seqresfile="";
+if(defined($ARGV[1])) 
+{
+    $in_seqresfile=$ARGV[1];
+}
+
+#  0    1    2     3     4    5     6     7     8
+my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime(time);
+$mon++;
+$year=1900+$year;
+$outfolder="$base_outfolder/$year-$mon";
+`mkdir $outfolder` if(!-e $outfolder);
+$folder=`mktemp -d $outfolder/job.XXXXXXXX`;
+chomp($folder);
+
+$pdbfile="$folder/input.pdb";
+$seqres_file="$folder/seqres";
+$email_file="$folder/noemail";
+$name_file="$folder/name";
+`touch $email_file $name_file`;
+if(-e $in_pdbfile) {
+    `cp $in_pdbfile $pdbfile`;
+} else {
+    print STDERR "$in_pdbfile does not exit\n";
+    exit;
+}
+
+
+if(-e $in_seqresfile) {
+    `cp $in_seqresfile $seqres_file`;
+} else {
+    `touch $seqres_file`;
+}
+
+
+$cmd="$install_dir/apps/ProQ2/bin/ProQ2.pl $pdbfile $email_file $seqres_file Bfactor";
+print "CMD: $cmd\n";
+#`$cmd`;
