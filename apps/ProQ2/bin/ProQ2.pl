@@ -28,6 +28,7 @@ if(defined($ARGV[3])) {
     $bfactorPDB=1;
     print "Will output bfactorPDB!\n";
 }
+my $pdboutfile=$ARGV[4];
 
 my $sendemail=1;
  
@@ -413,7 +414,7 @@ if($cleanup==1) {
 
 
 print "PDB with local error estimates: $pdb.orig.B\n";
-
+`cp $pdb.orig.B $pdboutfile`;
 
 sub std
 {

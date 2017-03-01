@@ -5,12 +5,13 @@ use Cwd 'abs_path';
 my $script_path = dirname(abs_path($0));
 my $install_dir=abs_path("$script_path/../");
 my $base_outfolder="$install_dir/server/output/";
-$in_pdbfile=$ARGV[0];
-
+$in_pdbfile="/input/$ARGV[0]";
+my $pdboutfile=$in_pdbfile;
+$pdboutfile=~s/\.pdb$/\.proq2\.pdb/;
 $in_seqresfile="";
 if(defined($ARGV[1])) 
 {
-    $in_seqresfile=$ARGV[1];
+    $in_seqresfile="/input/$ARGV[1]";
 }
 
 #  0    1    2     3     4    5     6     7     8
@@ -42,7 +43,7 @@ if(-e $in_seqresfile) {
 }
 
 
-$cmd="$install_dir/apps/ProQ2/bin/ProQ2.pl $pdbfile $email_file $seqres_file Bfactor";
+$cmd="$install_dir/apps/ProQ2/bin/ProQ2.pl $pdbfile $email_file $seqres_file Bfactor $pdboutfile";
 print "CMD: $cmd\n";
-#`$cmd`;
+#`$cmd|tail`;
 system($cmd);
