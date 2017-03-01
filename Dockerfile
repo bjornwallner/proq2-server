@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-RUN apt update && apt -y install git wget gnuplot
+RUN apt update && apt -y install git wget gnuplot emboss
 RUN git clone http://github.com/bjornwallner/proq2-server/
 RUN cd proq2-server/ && git pull
 RUN cd proq2-server/ && bin/download_dbs.sh
