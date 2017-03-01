@@ -17,6 +17,13 @@ my $base_outfolder="$install_dir/server/output/";
 $in_pdbfile="/input/$ARGV[0]";
 my $pdboutfile=$in_pdbfile;
 $pdboutfile=~s/\.pdb$/\.proq2\.pdb/;
+if(-e $pdboutfile) {
+
+    print "$pdboutfile exist. Delete to rerun.\n";
+    exit;
+}
+
+
 $in_seqresfile="";
 if(defined($ARGV[1])) 
 {
