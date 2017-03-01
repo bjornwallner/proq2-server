@@ -63,7 +63,7 @@ my $seqres="";
 open(FILE,$seqres_file);
 while(<FILE>) {
     chomp;
-    if(not(/^/)) {
+    if(not(/^>/)) {
 	$seqres.=$_;
     }
 }
