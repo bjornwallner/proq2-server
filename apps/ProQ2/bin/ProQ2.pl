@@ -85,8 +85,12 @@ if(length($seqres)>10) {
 	open(OUT,">$seqres_folder/seqres");
 	print OUT ">seqres\n$seqres\n";
 	close(OUT);
+	#print $seqres."\n";
+	#print "$install_dir/apps/ProQ2/bin/run_all_external.pl -fasta $seqres_folder/seqres\n";
+	#exit;
 	`$install_dir/apps/ProQ2/bin/run_all_external.pl -fasta $seqres_folder/seqres`;
 	print "Caching seqres...\n";
+	
     } else {
 	print "seqres already in cache $seqres_folder!\n";
     }
@@ -102,12 +106,12 @@ if(length($seqres)>10) {
     `gzip -f $seqres_folder/*`;
 } elsif(-e $pdbseq_folder) {
     print "pdbseq already in cache $pdbseq_folder\n";
-    `gunzip -f $pdbseq_folder/*.gz`;
+    `gunzip -fq $pdbseq_folder/*.gz`;
     `cp $pdbseq_folder/seqres.acc $pdb.acc`;
     `cp $pdbseq_folder/seqres.psi $pdb.psi`;
     `cp $pdbseq_folder/seqres.mtx $pdb.mtx`;
     `cp $pdbseq_folder/seqres.ss2 $pdb.ss2`;
-    `gzip -f $pdbseq_folder/*`;
+    `gzip -fq $pdbseq_folder/*`;
 } else {
     $cache_after=1;
 }

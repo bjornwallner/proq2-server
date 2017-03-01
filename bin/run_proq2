@@ -63,3 +63,4 @@ $cmd="export PERL5LIB=$install_dir/apps/ProQ2/bin;$install_dir/apps/ProQ2/bin/Pr
 print "CMD: $cmd\n";
 #`$cmd|tail`;
 system($cmd);
+#`$cmd`;

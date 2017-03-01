@@ -109,8 +109,7 @@ my $subunits=`grep -c TER $pdb`;
 chomp($subunits);
 $subunits=1 if($subunits==0 || !$casp_target);
 
-`mv -f $pdb $pdb.orig`;
-`grep ^ATOM $pdb.orig | $install_dir/apps/ProQ2/bin/kill_chain.pl  > $pdb`;
+
 
 #if(!$casp_target)
 #fasta
@@ -118,6 +117,8 @@ $fasta="$pdb.fasta";
 if($type eq "-fasta") {
     `cp $pdb $fasta`;
 } else {
+    `mv -f $pdb $pdb.orig`;
+    `grep ^ATOM $pdb.orig | $install_dir/apps/ProQ2/bin/kill_chain.pl  > $pdb`;
     $seq=`$install_dir/apps/ProQ2/bin/aa321CA.pl $pdb`;
     print $fasta."\n";
     if(!-e $fasta) {
@@ -192,6 +193,25 @@ if(!-e $profile_file || !-e $profile_mtx_file || !-e $ss2_file)
     }
 
 }
+$accfile="$pdb.acc";
+if(!-e $accfile) {
+    print "Accpro\n";
+    $target_acc=$targetdir."/$target/$target.acc";
+    if(!$casp_target) {
+	$target_acc=$targetdir."/$target.acc";
+    }
+    if(!-e $target_acc) {
+
+	#system("$install_dir/apps/sspro4/bin/predict_acc.sh $fasta $accfile");
+	`$install_dir/apps/sspro4/bin/predict_acc.sh $fasta $accfile`;
+    } else {
+	print "subset with $target_acc\n";
+	system("$install_dir/apps/ProQ2/bin/acc_subset.pl $target_acc $fasta $accfile $subunits");
+    }
+    
+}
+exit if($type eq "-fasta");
+
 #exit;
 if(!-e "$pdb.stride") {
     print "stride\n";
@@ -240,29 +260,13 @@ if(!-e $naccessfile) {
     chdir($path);
 }
 
-$accfile="$pdb.acc";
+
 
 if($refinement) {
     $accfile2="$caspdir/refinement/TR$num.pdb.acc";
     symlink($accfile2,$accfile);
 }
 
-if(!-e $accfile) {
-    print "Accpro\n";
-    $target_acc=$targetdir."/$target/$target.acc";
-    if(!$casp_target) {
-	$target_acc=$targetdir."/$target.acc";
-    }
-    if(!-e $target_acc) {
-
-	#system("$install_dir/apps/sspro4/bin/predict_acc.sh $fasta $accfile");
-	`$install_dir/apps/sspro4/bin/predict_acc.sh $fasta $accfile`;
-    } else {
-	print "subset with $target_acc\n";
-	system("$install_dir/apps/ProQ2/bin/acc_subset.pl $target_acc $fasta $accfile $subunits");
-    }
-    
-}
 
 
 $proqres_flags="-rc 6 -ac 4 -w 23 -t 6";
