@@ -411,6 +411,10 @@ if($cleanup==1) {
 #`cat $folder/results.email | /usr/sbin/sendmail -t`;
 
 
+
+print "PDB with local error estimates: $pdb.orig.B\n";
+
+
 sub std
 {
     my @data=@_;
