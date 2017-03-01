@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w 
-require '/local/www/services/ProQ2/apps/ProQ2/bin/bjornlib.pl';
+require 'bjornlib.pl';
 #use POSIX qw(ceil);
 #exit;
 $subunits=1;
