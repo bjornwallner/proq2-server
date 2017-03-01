@@ -5,7 +5,7 @@ use Cwd 'abs_path';
 
 if(not(defined($ARGV[0]))) {
     print "Create a temporary folder and set it to \$TMPDIR\n";
-    print "docker run -v \$TMPDIR:/proq2-server/server/output/ -v \$PWD:/input/ bjornwallner/proq2 <input.pdb>\n";
+    print "docker run -v \$TMPDIR:/proq2-server/server/output/ -v \$PWD:/input/ bjornwallner/proq2 <input.pdb> <seqres [optional]>\n";
     exit;
 }
 
