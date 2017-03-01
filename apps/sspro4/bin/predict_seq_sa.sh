@@ -5,4 +5,4 @@ then
 	exit 1
 fi
 #assumption: alignment_file = align_dir + name
-/tmp/leffe/proq2-server/apps/sspro4/script/predict_seq_sa.pl /tmp/leffe/proq2-server/apps/sspro4/server/predict_seq_sa.sh $1 $2 $3 
+/tmp/proq2-server/apps/sspro4/script/predict_seq_sa.pl /tmp/proq2-server/apps/sspro4/server/predict_seq_sa.sh $1 $2 $3 

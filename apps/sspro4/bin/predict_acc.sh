@@ -6,4 +6,4 @@ then
 	exit 1
 fi
 #output: a file with predicted ss and sa.
-/tmp/leffe/proq2-server/apps/sspro4/script/predict_acc.pl /tmp/leffe/proq2-server/apps/sspro4/blast2.2.8/ /tmp/leffe/proq2-server/apps/sspro4/data/big/big_98_X /tmp/leffe/proq2-server/apps/sspro4/data/nr/nr /tmp/leffe/proq2-server/apps/sspro4/server/predict_seq_sa.sh /tmp/leffe/proq2-server/apps/sspro4/script/ $1 $2 
+/tmp/proq2-server/apps/sspro4/script/predict_acc.pl /tmp/proq2-server/apps/sspro4/blast2.2.8/ /tmp/proq2-server/apps/sspro4/data/big/big_98_X /tmp/proq2-server/apps/sspro4/data/nr/nr /tmp/proq2-server/apps/sspro4/server/predict_seq_sa.sh /tmp/proq2-server/apps/sspro4/script/ $1 $2 

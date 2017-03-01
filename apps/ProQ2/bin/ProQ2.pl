@@ -219,6 +219,8 @@ while(<IN>) {
 }
 close(OUT);
 close(IN);
+system("cat $pdb.orig.B");
+exit;
 
 my @CAs=`grep CA $pdb.orig`;
 my @id=();
