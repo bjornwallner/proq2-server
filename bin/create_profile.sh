@@ -57,11 +57,11 @@ echo "BASE: $basename"
 #\cp -f $1 psitmp.fasta
 echo cp -f $1 psitmp.$$.fasta
 cp -f $1 psitmp.$$.fasta
-
-echo "Running PSI-BLAST with sequence" $1 "..."
+cpu=`grep -c CPU /proc/cpuinfo`;
+echo "Running PSI-BLAST with sequence" $1 "... on " $cpu " cpus"
 echo "$ncbidir/blastpgp -a 4 -j 3 -h 0.001 -d $dbname -F F -i psitmp.$$.fasta -C psitmp.$$.chk -Q psitmp.$$.psi"
 
-$ncbidir/blastpgp -a 4 -j 3 -h 0.001 -d $dbname -F F -i psitmp.$$.fasta -C psitmp.$$.chk -o psitmp.$$.blastpgp -Q psitmp.$$.psi > /dev/null #& $rootname.blast
+$ncbidir/blastpgp -a $cpu -j 3 -h 0.001 -d $dbname -F F -i psitmp.$$.fasta -C psitmp.$$.chk -o psitmp.$$.blastpgp -Q psitmp.$$.psi > /dev/null #& $rootname.blast
 
 
 echo "Running Makemat..."
