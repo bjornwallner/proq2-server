@@ -13,12 +13,12 @@
 #print join("\n",@INC);
 
 #use Bio::Ext::Align;
-use Bio::Pdb;
-use Bio::AlignIO;
-use Bio::SimpleAlign;
+#use Bio::Pdb;
+#use Bio::AlignIO;
+#use Bio::SimpleAlign;
 #use Bio::Tools::pSW;
-use Bio::LocatableSeq;
-use Bio::Seq;
+#use Bio::LocatableSeq;
+#use Bio::Seq;
 use File::Temp qw/ tempfile /;
 
 sub get_residues_with_CA
@@ -174,135 +174,7 @@ sub parse_needle_output
     return($seq1,$seq2);
 }
 
-sub align_legacy   # Takes two strings removes all dashes and returns the alignment. 
-{
-    my ($seq1,$seq2)=@_;
-    my $input1=$seq1;
-    my $input2=$seq2;
-    $seq1=~s/-//g;
-    $seq2=~s/-//g;
-    #$seq1=remove_dashes($seq1);
-    #$seq2=remove_dashes($seq2);
-    $seq1=~s/\n//g;
-    $seq2=~s/\n//g;
-    $seq1=~s/\s+//g;
-    $seq2=~s/\s+//g;
-   # if(length($seq1)==1 || length($seq2)==1)
-   # {
-   #	my $len1=length($seq1);
-   #	my $len2=length($seq2);
-   #	my $len3=length($input1);
-   #	my $len4=length($input2);
-   #	if($len1==1)
-   #	{
-   #	   $dashes=length($input2)-length($input1);
-   #	   $ali_return1=$input1._dashes($dashes);
-   #	   $ali_return2=$input2;
-   #	}
-   #	if($len2==1)
-   #	{
-   #	   $dashes=length($input1)-length($input2);
-   #	   $ali_return1=$input1;
-   #	   $ali_return2=$input2._dashes($dashes);
-   #	}
-   #	return ($ali_return1,$ali_return2)
-   # }
-   #
-   #
-   # else
-   # {
-    my ($ali_return1,$ali_return2);
-    my $factory=new Bio::Tools::pSW('-matrix' => '/Users/bjorn/Research/lib/bioperl-ext/Bio/Ext/Align/blosum62.bla','-gap' => 1,'-ext' => 0);
-    my $seq_obj1=Bio::Seq->new(-moltype => 'protein', -seq => $seq1, -id => "seq1");
-    my $seq_obj2=Bio::Seq->new(-moltype => 'protein', -seq => $seq2, -id => "seq2");
-    my $aln = $factory->pairwise_alignment($seq_obj1,$seq_obj2);
-    #my $alnout = new Bio::AlignIO(-format => 'fasta',
-     #                             -fh     => \*STDOUT);
 
-    #$alnout->write_aln($aln);
-#    print "align\n";
-#    print $aln."\n";
-#    foreach my $tmp(keys(%{$aln}))
-#    {
-#	print $tmp."\n";
-#	print $aln{$tmp};
-   # }
-   # print $seq_obj2->seq();
-   # print "\n";
-   # print $aln,"\n";
-    #my $nice_ali=$factory->align_and_show($seq_obj1,$seq_obj2,*STDOUT);
-    
-    ($ali_return1,$ali_return2)=fix_alignment($aln,$seq_obj1,$seq_obj2);
-    #print "$ali_return1\n$ali_return2\n";
-    return ($ali_return1,$ali_return2);
-    
-}
-sub align_id   # Takes two strings removes all dashes and returns the alignment. 
-{
-    my ($seq1,$seq2)=@_;
-    my $input1=$seq1;
-    my $input2=$seq2;
-    $seq1=~s/-//g;
-    $seq2=~s/-//g;
-    #$seq1=remove_dashes($seq1);
-    #$seq2=remove_dashes($seq2);
-    $seq1=~s/\n//g;
-    $seq2=~s/\n//g;
-   # if(length($seq1)==1 || length($seq2)==1)
-   # {
-   #	my $len1=length($seq1);
-   #	my $len2=length($seq2);
-   #	my $len3=length($input1);
-   #	my $len4=length($input2);
-   #	if($len1==1)
-   #	{
-   #	   $dashes=length($input2)-length($input1);
-   #	   $ali_return1=$input1._dashes($dashes);
-   #	   $ali_return2=$input2;
-   #	}
-   #	if($len2==1)
-   #	{
-   #	   $dashes=length($input1)-length($input2);
-   #	   $ali_return1=$input1;
-   #	   $ali_return2=$input2._dashes($dashes);
-   #	}
-   #	return ($ali_return1,$ali_return2)
-   # }
-   #
-   #
-   # else
-   # {
-    my ($ali_return1,$ali_return2);
-    my $factory=new Bio::Tools::pSW('-matrix' => '~/lib/bioperl/Bio/Ext/Align/indent.bla','-gap' => 1,'-ext' => 0);
-    my $seq_obj1=Bio::Seq->new(-moltype => 'protein', -seq => $seq1, -id => "seq1");
-    my $seq_obj2=Bio::Seq->new(-moltype => 'protein', -seq => $seq2, -id => "seq2");
-    my $aln = $factory->pairwise_alignment($seq_obj1,$seq_obj2);
-    #$factory->align_and_show($seq_obj1,$seq_obj2,*STDOUT);
-    ($ali_return1,$ali_return2)=fix_alignment($aln,$seq_obj1,$seq_obj2);
-    return ($ali_return1,$ali_return2);
-    
-}
-
-sub alignseq   # Takes two strings removes all dashes and returns the alignment. 
-{
-    my ($seq1,$seq2)=@_;
-    $seq1=remove_dashes($seq1);
-    $seq2=remove_dashes($seq2);
-    my ($ali_return1,$ali_return2);
-    my $factory=new Bio::Tools::pSW('-matrix' => '/Users/bjorn/Research/lib/bioperl-ext/Bio/Ext/Align/blosum62.bla','-gap' => 12,'-ext' => 4);
-    my $seq_obj1=Bio::Seq->new(-moltype => 'protein', -seq => $seq1, -id => "seq1");
-    my $seq_obj2=Bio::Seq->new(-moltype => 'protein', -seq => $seq2, -id => "seq2");
-    my $aln = $factory->pairwise_alignment($seq_obj1,$seq_obj2);
-    #$factory->align_and_show($seq_obj1,$seq_obj2,*STDOUT);
-    ($ali_return1,$ali_return2)=fix_alignment($aln,$seq_obj1,$seq_obj2);
-    #$seq_obj1->DESTROY;
-    #$seq_obj2->DESTROY;
-    #$factory->DESTROY;
-    #delete($seq_obj1);
-    #delete($seq_obj2);
-    #delete($factory);
-    return ($ali_return1,$ali_return2);
-}
 
 
 sub remove_ends

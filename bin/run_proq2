@@ -52,7 +52,7 @@ if(-e $in_seqresfile) {
 }
 
 
-$cmd="$install_dir/apps/ProQ2/bin/ProQ2.pl $pdbfile $email_file $seqres_file Bfactor $pdboutfile";
+$cmd="export PERL5LIB=$install_dir/apps/ProQ2/bin;$install_dir/apps/ProQ2/bin/ProQ2.pl $pdbfile $email_file $seqres_file Bfactor $pdboutfile";
 print "CMD: $cmd\n";
 #`$cmd|tail`;
 system($cmd);

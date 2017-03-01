@@ -70,6 +70,7 @@ while(<FILE>) {
 $seqres=~s/\s+//g;
 #$seqres=~s/\n//g;
 my $pdbseq=`$install_dir/apps/ProQ2/bin/aa321CA.pl $pdb`;
+chomp($pdbseq);
 open(OUT,">$pdb.fasta");
 print OUT ">$pdb\n$pdbseq\n";
 close(OUT);
@@ -93,10 +94,12 @@ if(length($seqres)>10) {
 #    my $PERL5LIB="export PERL5LIB=/local/www/services/ProQ2/apps/ProQ2/bin";
  #   `$PERL5LIB export PERL5LIB=/local/www/services/ProQ2/apps/ProQ2/bin;`;
     print "getting data from cache...\n";
+    `gunzip -f $seqres_folder/*.gz`;
     `$install_dir/apps/ProQ2/bin/acc_subset.pl $seqres_folder/seqres.acc $pdb.fasta $pdb.acc`;
     `$install_dir/apps/ProQ2/bin/profile_subset.pl $seqres_folder/seqres.psi $pdb.fasta $pdb.psi`;
     `$install_dir/apps/ProQ2/bin/profile_subset.pl $seqres_folder/seqres.mtx $pdb.fasta $pdb.mtx`;
     `$install_dir/apps/ProQ2/bin/ss2_subset.pl $seqres_folder/seqres.ss2 $pdb.fasta $pdb.ss2`;
+    `gzip -f $seqres_folder/*`;
 } elsif(-e $pdbseq_folder) {
     print "pdbseq already in cache $pdbseq_folder\n";
     `gunzip -f $pdbseq_folder/*.gz`;
@@ -106,7 +109,7 @@ if(length($seqres)>10) {
     `cp $pdbseq_folder/seqres.ss2 $pdb.ss2`;
     `gzip -f $pdbseq_folder/*`;
 } else {
-        $cache_after=1;
+    $cache_after=1;
 }
 
 if($verbose) {
@@ -129,7 +132,8 @@ if($cache_after) {
 #print "/local/www/services/ProQ2/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1\n";
 
 print "$install_dir/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1\n";
-`export PERL5LIB=$install_dir/apps/ProQ2/bin;$install_dir/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1`;
+#`export PERL5LIB=$install_dir/apps/ProQ2/bin;
+`$install_dir/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1`;
 #system("/local/www/services/ProQ2/apps/ProQ2/bin/generate_svm_input.pl -i $pdb -o $folder/ -classify 1 -noprefix 1 -Sscore 3 -rc 6 -ac 4 -atom 1 -res 1 -surf50 1 -surf100 1 -surf25 1 -surf75 1 -pw 1 -pwin 23 -stride 5 -ss 1 -ss_sc 21 -entropy 3 -profile 0 -termini 5 -rsa_sc 21 -rsa 13 -grsa_sc 1 -gss_sc 1");
 
 
@@ -362,7 +366,7 @@ if($sendemail) {
 } else {
 
     `cp  $svm_pred_base.all $pdb.ProQ2`;
-}
+} 
 
 
 `cd $folder;tar -cf sequence_spec_input.tar $pdb_base.acc $pdb_base.fasta $pdb_base.mtx $pdb_base.psi $pdb_base.ss2`;
