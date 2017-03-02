@@ -9,12 +9,16 @@ if(not(defined($ARGV[0]))) {
     exit;
 }
 
+my $infolder="/input/";
+if(-e $infolder) {
+    chdir($infolder);
+}
 
 
 my $script_path = dirname(abs_path($0));
 my $install_dir=abs_path("$script_path/../");
 my $base_outfolder="$install_dir/server/output/";
-$in_pdbfile="/input/$ARGV[0]";
+$in_pdbfile="$ARGV[0]";
 my $pdboutfile=$in_pdbfile;
 $pdboutfile=~s/\.pdb$/\.proq2\.pdb/;
 if(-e $pdboutfile) {
