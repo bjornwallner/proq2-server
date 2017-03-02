@@ -229,7 +229,7 @@ if(!-e $naccessfile) {
     #print "$tmpfile\n";
     #exit;
     `$install_dir/apps/naccess/naccess $tmpfile.pdb`;
-    print "$install_dir/apps/naccess/naccess $tmpfile.pdb\n";
+#    print "$install_dir/apps/naccess/naccess $tmpfile.pdb\n";
 #print "$tmpfile.rsa\n";
     if(1==0) {
 	open(RSA,"$tmpfile.rsa");
@@ -290,7 +290,7 @@ if(!-e $proqoutfile_gz)
 	`export PROQRESDIR=$install_dir/apps/ProQres/weights; $install_dir/apps/ProQres/bin/ProQres -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input > $TMP/$proqoutfile.$$`;
     } else {
 
-	print "export PROQRESDIR=$install_dir/apps/ProQres/weights; $install_dir/apps/ProQres/bin/ProQres -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input\n";
+	print "ulimit -s unlimited;export PROQRESDIR=$install_dir/apps/ProQres/weights; $install_dir/apps/ProQres/bin/ProQres64 -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input\n";
 	`ulimit -s unlimited;export PROQRESDIR=$install_dir/apps/ProQres/weights; $install_dir/apps/ProQres/bin/ProQres64 -pdb $pdb -surf $naccessfile -stride $pdb.stride -psipred $pdb.ss2 -prof $pdb.psi $proqres_flags -output_input > $TMP/$proqoutfile.$$`;
     }
     `gzip $TMP/$proqoutfile.$$`;
